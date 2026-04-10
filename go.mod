@@ -1,6 +1,6 @@
 module github.com/usememos/memos
 
-go 1.25.7
+go 1.25.0
 
 require (
 	connectrpc.com/connect v1.19.1

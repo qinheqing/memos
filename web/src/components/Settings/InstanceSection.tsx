@@ -89,23 +89,33 @@ const InstanceSection = () => {
 
       <SettingGroup title={t("setting.system-section.title")} showSeparator>
         <SettingRow label={t("setting.system-section.additional-style")} vertical>
-          <Textarea
-            className="font-mono w-full"
-            rows={3}
-            placeholder={t("setting.system-section.additional-style-placeholder")}
-            value={instanceGeneralSetting.additionalStyle}
-            onChange={(event) => updatePartialSetting({ additionalStyle: event.target.value })}
-          />
+          <div className="w-full relative rounded-md overflow-hidden border border-input focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+            <Textarea
+              className="font-mono text-sm leading-relaxed w-full min-h-[160px] p-4 bg-muted/30 resize-y border-0 focus-visible:ring-0"
+              placeholder={t("setting.system-section.additional-style-placeholder")}
+              value={instanceGeneralSetting.additionalStyle}
+              onChange={(event) => updatePartialSetting({ additionalStyle: event.target.value })}
+              spellCheck={false}
+            />
+            <div className="absolute top-2 right-2 px-2 py-0.5 text-[10px] font-mono text-muted-foreground bg-background/80 backdrop-blur rounded border select-none pointer-events-none">
+              CSS
+            </div>
+          </div>
         </SettingRow>
 
         <SettingRow label={t("setting.system-section.additional-script")} vertical>
-          <Textarea
-            className="font-mono w-full"
-            rows={3}
-            placeholder={t("setting.system-section.additional-script-placeholder")}
-            value={instanceGeneralSetting.additionalScript}
-            onChange={(event) => updatePartialSetting({ additionalScript: event.target.value })}
-          />
+          <div className="w-full relative rounded-md overflow-hidden border border-input focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+            <Textarea
+              className="font-mono text-sm leading-relaxed w-full min-h-[160px] p-4 bg-muted/30 resize-y border-0 focus-visible:ring-0"
+              placeholder={t("setting.system-section.additional-script-placeholder")}
+              value={instanceGeneralSetting.additionalScript}
+              onChange={(event) => updatePartialSetting({ additionalScript: event.target.value })}
+              spellCheck={false}
+            />
+            <div className="absolute top-2 right-2 px-2 py-0.5 text-[10px] font-mono text-muted-foreground bg-background/80 backdrop-blur rounded border select-none pointer-events-none">
+              JavaScript
+            </div>
+          </div>
         </SettingRow>
       </SettingGroup>
 

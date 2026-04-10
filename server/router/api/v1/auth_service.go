@@ -381,13 +381,24 @@ func (*APIV1Service) buildRefreshTokenCookie(ctx context.Context, refreshToken s
 	}
 
 	// Try to determine if the request is HTTPS by checking the origin header
-	// Default to non-HTTPS (Lax SameSite) if metadata is not available
+	// or X-Forwarded-Proto header (for proxies).
+	// Default to non-HTTPS (Lax SameSite) if metadata is not available.
 	isHTTPS := false
 	if md, ok := metadata.FromIncomingContext(ctx); ok {
+		// Check Origin header.
 		for _, v := range md.Get("origin") {
 			if strings.HasPrefix(v, "https://") {
 				isHTTPS = true
 				break
+			}
+		}
+		// Check X-Forwarded-Proto header.
+		if !isHTTPS {
+			for _, v := range md.Get("x-forwarded-proto") {
+				if strings.HasPrefix(v, "https") {
+					isHTTPS = true
+					break
+				}
 			}
 		}
 	}

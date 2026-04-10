@@ -44,6 +44,9 @@ func (*MetadataInterceptor) WrapUnary(next connect.UnaryFunc) connect.UnaryFunc 
 		if xri := header.Get("X-Real-Ip"); xri != "" {
 			md.Set("x-real-ip", xri)
 		}
+		if xfp := header.Get("X-Forwarded-Proto"); xfp != "" {
+			md.Set("x-forwarded-proto", xfp)
+		}
 		// Forward Cookie header for authentication methods that need it (e.g., RefreshToken)
 		if cookie := header.Get("Cookie"); cookie != "" {
 			md.Set("cookie", cookie)

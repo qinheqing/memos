@@ -1,0 +1,19 @@
+version: "3.5"
+
+services:
+  memos:
+    # 请将此处修改为您推送到 Docker Hub 的镜像名称
+    # 例如: your-username/memos:latest
+    image: memos:latest
+    container_name: memos
+    restart: always
+    ports:
+      - 5230:5230
+    volumes:
+      - ./data:/var/opt/memos # 笔记数据和数据库存放地
+    environment:
+      - TZ=Asia/Shanghai
+      # 移除了原配置中可能存在的反引号，并确保 URL 正确
+      - MEMOS_PUBLIC_URL=https://my-memo.tocmcc.cn
+      # 显式设置运行模式为生产环境
+      - MEMOS_MODE=prod
